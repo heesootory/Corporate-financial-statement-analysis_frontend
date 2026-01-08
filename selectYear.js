@@ -78,7 +78,7 @@ async function findGrowthStocks(min, max) {
   try {
     // 1. fetch 요청 (백엔드의 @RequestParam 이름인 minYear, maxYear와 일치시킴)
     const response = await fetch(
-      `http://121.130.16.49:8080/findGrowthStocks?minYear=${min}&maxYear=${max}`
+      `http://121.130.16.49:7777/findGrowthStocks?minYear=${min}&maxYear=${max}`
     );
 
     // 2. HTTP 상태 코드가 200(OK)이 아닐 경우 에러 처리
