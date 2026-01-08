@@ -1,5 +1,5 @@
 async function springBootConnectionTest() {
-  const response = await fetch("http://121.130.16.49:7777/test");
+  const response = await fetch("/proxy-api/test");
 
   const result = await response.text();
 
@@ -8,7 +8,7 @@ async function springBootConnectionTest() {
 
 // 모든 종목 조회 함수.
 async function findAllStocks() {
-  const response = await fetch("http://121.130.16.49:7777/allStocks");
+  const response = await fetch("/proxy-api/allStocks");
 
   const result = await response.text();
 
@@ -17,7 +17,7 @@ async function findAllStocks() {
 
 // 정상 상장 기업들 플래그 체크 함수.
 async function updateExist() {
-  const response = await fetch("http://121.130.16.49:7777/updateExist", {
+  const response = await fetch("/proxy-api/updateExist", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -31,7 +31,7 @@ async function updateExist() {
 
 // 매출액과 영업이익 데이터 삽입 함수.
 async function insertData() {
-  const response = await fetch("http://121.130.16.49:7777/insertReAndOpData", {
+  const response = await fetch("/proxy-api/insertReAndOpData", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -46,7 +46,7 @@ async function insertData() {
 // 성장주 조회 함수.
 async function findGrowthStockS(min, max) {
   const response = await fetch(
-    `http://121.130.16.49:7777/findGrowthStockS?min=${min}&max=${max}`
+    `/proxy-api/findGrowthStockS?min=${min}&max=${max}`
   );
 
   const result = await response.text();
