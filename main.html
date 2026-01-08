@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Market Search — 기본 템플릿</title>
+    <meta name="description" content="간단한 반응형 HTML5 기본 템플릿" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <script type="text/javascript" src="./index.js"></script>
+    
+
+    <div class="container">
+      <header>
+        <h1>Stock Market Search</h1>
+      </header>
+
+      <main>
+        <section>
+          <h2>매출액, 영업이익 연속 상승주 찾기</h2>
+        </section>
+
+        <button onclick="springBootConnectionTest()">서버 test</button>
+        <button disabled onclick="findAllStocks()">모든 상장주식 호출</button>
+        <button disabled onclick="updateExist()"> 상장 존재 여부 업데이트</button>
+        <button disabled onclick="insertData()"> 매출액과 영업이익 데이터 저장</button>
+
+
+        <section class="range-bar-container">
+          <h3 id="searchTitle">연도별 기간 선택(2020.01.01 ~ 2024.12.31)</h3>
+          <h4 id="titleDescrip"> -> 포함된 연도의 1년 사업보고서 내용이 포함.</h4>
+          <div class="range-bar" id="rangeBar">
+            <div class="range-selected" id="rangeSelected"></div>
+            <div class="point" data-year="2020" style="left: 0%;"><span class="year-label">2020</span></div>
+            <div class="point" data-year="2021" style="left: 25%;"><span class="year-label">2021</span></div>
+            <div class="point" data-year="2022" style="left: 50%;"><span class="year-label">2022</span></div>
+            <div class="point" data-year="2023" style="left: 75%;"><span class="year-label">2023</span></div>
+            <div class="point" data-year="2024" style="left: 100%;"><span class="year-label">2024</span></div>
+          </div>
+          <p id="selectedRange">선택된 범위: 없음</p>
+          <button id="queryButton" disabled>조회</button>
+          <div id="resultsContainer"></div>
+        </section>
+      </main>
+    <script src="selectYear.js"></script>
+  </body>
+</html>
