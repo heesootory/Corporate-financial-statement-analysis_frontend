@@ -78,8 +78,8 @@ async function findGrowthStocks(min, max) {
   try {
     // 1. fetch 요청 (백엔드의 @RequestParam 이름인 minYear, maxYear와 일치시킴)
     const response = await fetch(
-      `/proxy-api/findGrowthStocks?minYear=${min}&maxYear=${max}`
-      //`http://127.0.0.1:8080/findGrowthStocks?minYear=${min}&maxYear=${max}`
+      //`/proxy-api/findGrowthStocks?minYear=${min}&maxYear=${max}`
+      `http://127.0.0.1:8080/findGrowthStocks?minYear=${min}&maxYear=${max}`
     );
 
     // 2. HTTP 상태 코드가 200(OK)이 아닐 경우 에러 처리
@@ -121,7 +121,7 @@ function renderStocks(result) {
       item.corpCode
     })</div>
       <table>
-        <tr><th>연도</th><th>매출액</th><th>영업이익</th></tr>
+        <tr><th>연도</th><th>매출액(억원)</th><th>매출액상승률</th><th>영업이익(억원)</th><th>영업이익상승률</th></tr>
         ${years
           .map((y, i) => {
             const rev = item.financialData["rev_" + y];
@@ -138,19 +138,15 @@ function renderStocks(result) {
               prevOp && prevOp !== 0
                 ? Math.abs(((op - prevOp) / prevOp) * 100).toFixed(1)
                 : null;
-            const revDisplay = rev
-              ? rev.toLocaleString() +
-                (revPercent
-                  ? ` <span style="color: green;">(${revPercent}%)</span>`
-                  : "")
+            const revDisplay = rev ? Math.round(rev / 100000000) : "-";
+            const opDisplay = op ? Math.round(op / 100000000) : "-";
+            const revPercentDisplay = revPercent
+              ? `<span style="color: green;">${revPercent}%</span>`
               : "-";
-            const opDisplay = op
-              ? op.toLocaleString() +
-                (opPercent
-                  ? ` <span style="color: green;">(${opPercent}%)</span>`
-                  : "")
+            const opPercentDisplay = opPercent
+              ? `<span style="color: green;">${opPercent}%</span>`
               : "-";
-            return `<tr><td>${y}</td><td>${revDisplay}</td><td>${opDisplay}</td></tr>`;
+            return `<tr><td>${y}</td><td>${revDisplay}</td><td>${revPercentDisplay}</td><td>${opDisplay}</td><td>${opPercentDisplay}</td></tr>`;
           })
           .join("")}
       </table>
