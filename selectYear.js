@@ -79,6 +79,7 @@ async function findGrowthStocks(min, max) {
     // 1. fetch 요청 (백엔드의 @RequestParam 이름인 minYear, maxYear와 일치시킴)
     const response = await fetch(
       `/proxy-api/findGrowthStocks?minYear=${min}&maxYear=${max}`
+      //`http://127.0.0.1:8080/findGrowthStocks?minYear=${min}&maxYear=${max}`
     );
 
     // 2. HTTP 상태 코드가 200(OK)이 아닐 경우 에러 처리
@@ -171,6 +172,9 @@ function renderStocks(result) {
       `<p>총 ${result.count}개의 기업을 찾았습니다.</p>` +
       pageCards.map((c) => c.outerHTML).join("") +
       generatePagination();
+
+    // 페이지 이동 시 화면 상단으로 자동 스크롤
+    window.scrollTo(0, 0);
   }
 
   // 페이징 버튼 생성

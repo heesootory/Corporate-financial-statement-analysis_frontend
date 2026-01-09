@@ -1,3 +1,4 @@
+// 서버 test
 async function springBootConnectionTest() {
   const response = await fetch("/proxy-api/test");
 
